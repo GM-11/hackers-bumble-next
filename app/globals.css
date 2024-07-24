@@ -21,4 +21,17 @@
   h6 {
     @apply text-sm;
   }
+  input {
+    @apply p-4 border border-gray-500 rounded-lg w-full my-2;
+  }
+  select {
+    @apply p-4 border border-gray-500 rounded-lg w-full my-2;
+  }
+  /*
+  button {
+    @apply p-4 bg-blue-500 text-white rounded-lg w-auto;
+  }
+  nav {
+    @apply p-4 bg-primary text-text flex justify-between items-center align-middle;
+  } */
 }

@@ -22,6 +22,7 @@ export enum Lang {
 }
 
 export enum Role {
+  NOT_SELECTED = "Select your role",
   WEB_DEVELOPER = "Web Developer",
   SOFTWARE_ENGINEER = "Software Engineer",
   FRONTEND_DEVELOPER = "Frontend Developer",
@@ -47,12 +48,14 @@ export enum Role {
 }
 
 export enum Os {
+  NOT_SELECTED = "Select your OS",
   WINDOWS = "Windows",
   MAC = "Mac",
   LINUX = "Linux",
 }
 
 export enum Gender {
+  NOT_SELECTED = "select your gender",
   M = "male",
   F = "female",
 }
