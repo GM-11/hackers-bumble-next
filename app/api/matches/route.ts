@@ -1,6 +1,6 @@
-import connectMongo from "@/app/lib/connectMongo";
-import User from "@/app/models/User";
-import { Role, Os, Lang } from "@/app/utils/types";
+import connectMongo from "@/app/lib/utils/connectMongo";
+import User from "@/app/lib/models/User";
+import { Role, Os, Lang } from "@/app/lib/utils/types";
 
 export async function GET(req: Request) {
   connectMongo();

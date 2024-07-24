@@ -1,8 +1,8 @@
-import connectMongo from "@/app/lib/connectMongo";
-import socketClient from "@/app/lib/socketClient";
-import ChatRoom, { IChatRoom } from "@/app/models/ChatRoom";
-import User from "@/app/models/User";
-import { generateChatRoomId } from "@/app/utils/generteIds";
+import connectMongo from "@/app/lib/utils/connectMongo";
+import socketClient from "@/app/lib/utils/socketClient";
+import ChatRoom, { IChatRoom } from "@/app/lib/models/ChatRoom";
+import User from "@/app/lib/models/User";
+import { generateChatRoomId } from "@/app/lib/utils/generteIds";
 
 export async function POST(req: Request) {
   try {

@@ -1,7 +1,7 @@
-import connectMongo from "@/app/lib/connectMongo";
-import User, { IUser } from "@/app/models/User";
+import connectMongo from "@/app/lib/utils/connectMongo";
+import User, { IUser } from "@/app/lib/models/User";
 import bcrypt from "bcryptjs";
-import { Lang, Os, Role } from "@/app/utils/types";
+import { Lang, Os, Role } from "@/app/lib/utils/types";
 
 export async function POST(req: Request) {
   try {

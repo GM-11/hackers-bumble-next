@@ -1,4 +1,4 @@
-import User from "@/app/models/User";
+import User from "@/app/lib/models/User";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export async function GET(
