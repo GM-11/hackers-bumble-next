@@ -1,0 +1,58 @@
+export enum Lang {
+  JS = "JavaScript",
+  TS = "TypeScript",
+  PY = "Python",
+  JAVA = "Java",
+  C = "C",
+  CPP = "C++",
+  CSHARP = "C#",
+  RUBY = "Ruby",
+  PHP = "PHP",
+  SWIFT = "Swift",
+  KOTLIN = "Kotlin",
+  GO = "Go",
+  RS = "Rust",
+  SCALA = "Scala",
+  R = "R",
+  SHELL = "Shell",
+  SQL = "SQL",
+  HTML = "HTML",
+  CSS = "CSS",
+  SOL = "Solidity",
+}
+
+export enum Role {
+  WEB_DEVELOPER = "Web Developer",
+  SOFTWARE_ENGINEER = "Software Engineer",
+  FRONTEND_DEVELOPER = "Frontend Developer",
+  BACKEND_DEVELOPER = "Backend Developer",
+  FULL_STACK_DEVELOPER = "Full Stack Developer",
+  DEVOPS_ENGINEER = "DevOps Engineer",
+  DATA_SCIENTIST = "Data Scientist",
+  MACHINE_LEARNING_ENGINEER = "Machine Learning Engineer",
+  SYSTEMS_ENGINEER = "Systems Engineer",
+  GAME_DEVELOPER = "Game Developer",
+  MOBILE_DEVELOPER = "Mobile Developer",
+  CLOUD_ENGINEER = "Cloud Engineer",
+  SECURITY_ENGINEER = "Security Engineer",
+  NETWORK_ENGINEER = "Network Engineer",
+  DATABASE_ADMINISTRATOR = "Database Administrator",
+  UI_UX_DESIGNER = "UI/UX Designer",
+  BLOCKCHAIN_DEVELOPER = "Blockchain Developer",
+  QA_ENGINEER = "QA Engineer",
+  IOT_DEVELOPER = "IOT Developer",
+  EMBEDDED_ENGINEER = "Embedded Engineer",
+  AR_VR_DEVELOPER = "AR/VR Developer",
+  AI_ENGINEER = "AI Engineer",
+}
+
+export enum Os {
+  WINDOWS = "Windows",
+  MAC = "Mac",
+  LINUX = "Linux",
+}
+
+export enum Gender {
+  M = "male",
+  F = "female",
+}
