@@ -20,18 +20,6 @@ app.prepare().then(() => {
 
   sockerServerHandler(io);
 
-  //   io.on("connection", (socket) => {
-  //     console.log("New client connected");
-  //     // socket.on("message", (data) => {
-  //     //   console.log("Message received:", data);
-  //     //   io.emit("message", data);
-  //     // });
-
-  //     // socket.on("disconnect", () => {
-  //     //   console.log("Client disconnected");
-  //     // });
-  //   });
-
   server.get("*", (req: Request, res: Response) => {
     const parsedUrl = parse(req.url, true);
     handle(req, res, parsedUrl);
