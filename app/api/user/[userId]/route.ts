@@ -1,12 +1,13 @@
-import User from "@/app/lib/models/User";
-import { NextApiRequest, NextApiResponse } from "next";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function GET(
   req: Request,
   { params }: { params: { userId: string } }
 ) {
   try {
-    const user = await User.findById(params.userId);
+    const user = await prisma.user.findUnique({ where: { id: params.userId } });
     if (user) {
       return Response.json(user, { status: 200 });
     } else {

@@ -1,4 +1,4 @@
-import { Gender, Os, Role } from "@/app/lib/utils/types";
+import { Gender, Os, Role } from "@/app/lib/types";
 
 export default function RoleOsGender({
   os,

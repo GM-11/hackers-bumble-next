@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Role, Gender, Os, Lang, UserClientData } from "../lib/types";
+import React, { useState } from "react";
+import { Role, Gender, Os, Lang } from "../lib/types";
 import RoleOsGender from "../components/loginPage/RoleOsGender";
 import NameEmailPass from "../components/loginPage/NameEmailPass";
 import Bio from "../components/loginPage/LangsBio";
@@ -17,15 +17,6 @@ function Login() {
   const [gender, setGender] = useState<Gender>(Gender.NOT_SELECTED);
   const [loginState, setLoginState] = useState(0);
   const router = useRouter();
-
-  let userData: UserClientData | null = JSON.parse(
-    localStorage.getItem("userData")!
-  );
-  useEffect(() => {
-    console.log(userData);
-
-    return;
-  }, [userData]);
 
   async function submit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -49,17 +40,11 @@ function Login() {
       const userData = {
         name,
         email,
-        gender,
         id: data._id,
       };
       localStorage.setItem("userData", JSON.stringify(userData));
-      router.push(window.location.href);
-      router.refresh();
+      redirect("/");
     }
-  }
-
-  if (userData) {
-    redirect("/");
   }
 
   return (

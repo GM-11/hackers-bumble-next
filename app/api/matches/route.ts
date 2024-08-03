@@ -1,26 +1,26 @@
-import connectMongo from "@/app/lib/utils/connectMongo";
-import User from "@/app/lib/models/User";
-import { Role, Os, Lang } from "@/app/lib/utils/types";
+import { Role, Os, Lang } from "@/app/lib/types";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function GET(req: Request) {
-  connectMongo();
   try {
     const searchParams = new URL(req.url).searchParams;
     const gender = searchParams.get("gender");
     const oppGender = gender === "male" ? "female" : "male";
-    let users = await User.find({ gender: oppGender });
+    let users = await prisma.user.findMany({ where: { gender: oppGender } });
     let u: {
       id: any;
       name: string;
       email: string;
-      role: Role[];
-      os: Os;
-      langs: Lang[];
+      role: String;
+      os: String;
+      langs: String[];
       gender: string;
     }[] = [];
     users.forEach((user) => {
       u.push({
-        id: user._id,
+        id: user.id,
         name: user.name,
         email: user.email,
         role: user.role,

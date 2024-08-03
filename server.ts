@@ -5,7 +5,7 @@ import { parse } from "url";
 import next from "next";
 import { Server } from "socket.io";
 import connectMongo from "./app/lib/utils/connectMongo";
-import { sockerServerHandler } from "./app/lib/utils/socketServer";
+import { sockerServerHandler } from "./app/lib/socketServer";
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });

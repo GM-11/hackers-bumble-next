@@ -1,24 +1,25 @@
 export enum Lang {
-  JS = "JavaScript",
-  TS = "TypeScript",
-  PY = "Python",
-  JAVA = "Java",
-  C = "C",
-  CPP = "C++",
-  CSHARP = "C#",
-  RUBY = "Ruby",
-  PHP = "PHP",
-  SWIFT = "Swift",
-  KOTLIN = "Kotlin",
-  GO = "Go",
-  RS = "Rust",
-  SCALA = "Scala",
-  R = "R",
-  SHELL = "Shell",
-  SQL = "SQL",
-  HTML = "HTML",
-  CSS = "CSS",
-  SOL = "Solidity",
+    NOT_SELECTED = "Select your lang",
+    JS = "JavaScript",
+    TS = "TypeScript",
+    PY = "Python",
+    JAVA = "Java",
+    C = "C",
+    CPP = "C++",
+    CSHARP = "C#",
+    RUBY = "Ruby",
+    PHP = "PHP",
+    SWIFT = "Swift",
+    KOTLIN = "Kotlin",
+    GO = "Go",
+    RS = "Rust",
+    SCALA = "Scala",
+    R = "R",
+    SHELL = "Shell",
+    SQL = "SQL",
+    HTML = "HTML",
+    CSS = "CSS",
+    SOL = "Solidity",
 }
 
 export enum Role {
@@ -59,3 +60,10 @@ export enum Gender {
   M = "male",
   F = "female",
 }
+
+export type UserClientData = {
+  name: string;
+  email: string;
+  gender: Gender;
+  id: string;
+};

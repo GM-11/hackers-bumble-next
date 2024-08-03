@@ -1,11 +1,11 @@
-import connectMongo from "@/app/lib/utils/connectMongo";
-import User, { IUser } from "@/app/lib/models/User";
 import bcrypt from "bcryptjs";
-import { Lang, Os, Role } from "@/app/lib/utils/types";
+import { Lang, Os, Role } from "@/app/lib/types";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
-    connectMongo();
     const { name, email, password, role, os, langs, bio, gender } =
       await req.json();
 
@@ -13,7 +13,9 @@ export async function POST(req: Request) {
       return Response.json({ error: "Missing fields" }, { status: 400 });
     }
 
-    const userExists = await User.findOne({ email });
+    await prisma.$connect();
+
+    const userExists = await prisma.user.findUnique({ where: { email } });
 
     if (userExists) {
       return Response.json({ error: "User already exists" }, { status: 400 });
@@ -22,18 +24,19 @@ export async function POST(req: Request) {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const user = new User({
-      name,
-      email,
-      password: hashedPassword,
-      role,
-      os,
-      langs,
-      bio,
-      gender,
+    const result = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        role,
+        os,
+        langs,
+        bio,
+        gender,
+      },
     });
 
-    const result = await user.save();
     return Response.json({ message: "User saved", ...result }, { status: 200 });
   } catch (error: any) {
     return Response.json({ error: error.message }, { status: 500 });
@@ -41,25 +44,25 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
-  connectMongo();
+  await prisma.$connect();
   try {
-    let users = await User.find();
+    let users = await prisma.user.findMany({});
     let u: {
       id: any;
       name: string;
       email: string;
-      role: Role[];
-      os: Os;
-      langs: Lang[];
+      role: String;
+      os: String;
+      langs: String[];
       gender: string;
     }[] = [];
     users.forEach((user) => {
       u.push({
-        id: user._id,
+        id: user.id,
         name: user.name,
         email: user.email,
-        role: user.role,
-        os: user.os,
+        role: user.role as string,
+        os: user.os as string,
         langs: user.langs,
         gender: user.gender,
       });

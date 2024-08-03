@@ -1,17 +1,20 @@
-import connectMongo from "@/app/lib/utils/connectMongo";
-import socketClient from "@/app/lib/utils/socketClient";
-import ChatRoom, { IChatRoom } from "@/app/lib/models/ChatRoom";
-import User from "@/app/lib/models/User";
-import { generateChatRoomId } from "@/app/lib/utils/generteIds";
+import socketClient from "@/app/lib/socketClient";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+import { generateChatRoomId } from "@/app/lib/generteIds";
 
 export async function POST(req: Request) {
   try {
-    connectMongo();
     const { senderEmail, receiverEmail } = await req.json();
     const chatRoomId = await generateChatRoomId(senderEmail, receiverEmail);
 
-    const sender = await User.findOne({ email: senderEmail });
-    const receiver = await User.findOne({ email: receiverEmail });
+    const sender = await prisma.user.findUnique({
+      where: { email: senderEmail },
+    });
+    const receiver = await prisma.user.findUnique({
+      where: { email: receiverEmail },
+    });
 
     if (!sender || !receiver) {
       return Response.json({ error: "User not found" }, { status: 404 });
@@ -24,27 +27,18 @@ export async function POST(req: Request) {
       );
     }
 
-    const room = new ChatRoom({
-      senderId: sender._id,
-      receiverId: receiver._id,
-      roomId: chatRoomId,
+    const result = await prisma.chatRoom.create({
+      data: {
+        senderId: sender.id,
+        receiverId: receiver.id,
+        roomId: chatRoomId,
+      },
     });
 
-    if (sender.chats.includes(room) || receiver.chats.includes(room)) {
-      return Response.json(
-        { message: "Chat room already exists" },
-        { status: 200 }
-      );
-    }
-
-    sender.chats.push(room);
-    receiver.chats.push(room);
-
-    await sender.save();
-    await receiver.save();
-    await room.save();
-
-    return Response.json({ message: "Chat room created" }, { status: 200 });
+    return Response.json(
+      { message: "Chat room created", ...result },
+      { status: 200 }
+    );
   } catch (error: any) {
     console.log(error);
     return Response.json({ error: error.message }, { status: 500 });
